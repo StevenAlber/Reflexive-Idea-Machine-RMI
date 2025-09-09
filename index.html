@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="pageTitle">Рефлексивная Машина Идей (RMI): Интерактивная Презентация</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e2e8f0;
+        }
+        html[lang="zh"] body { font-family: 'Noto Sans SC', sans-serif; }
+        html[lang="he"] body { font-family: 'Noto Sans Hebrew', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(96, 165, 250, 0.5);
+        }
+        .scroll-target {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-target.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+        .lang-button {
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+        .lang-button:hover {
+            opacity: 1;
+        }
+        .lang-button.active {
+            opacity: 1;
+            border-color: #60a5fa;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigatsiooniriba -->
+    <nav class="sticky top-0 z-50 p-4" style="background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(10px);">
+        <div class="container mx-auto flex justify-between items-center">
+            <h2 class="text-xl font-bold gradient-text">RMI</h2>
+            <div class="hidden md:flex items-center space-x-6 text-slate-300">
+                <a href="#manifest" class="hover:text-blue-400 transition" data-key="navManifest">Манифест</a>
+                <a href="#algebra" class="hover:text-blue-400 transition" data-key="navCore">Ядро</a>
+                <a href="#demo" class="hover:text-blue-400 transition" data-key="navDemo">Демонстрация</a>
+                <a href="#arch" class="hover:text-blue-400 transition" data-key="navArch">Архитектура</a>
+                <a href="#claims" class="hover:text-blue-400 transition" data-key="navClaims">Тезисы</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                 <img src="https://flagcdn.com/w40/ru.png" class="lang-button w-6 h-6" data-lang="ru" alt="Russian Flag">
+                 <img src="https://flagcdn.com/w40/gb.png" class="lang-button w-6 h-6" data-lang="en" alt="British Flag">
+                 <img src="https://flagcdn.com/w40/il.png" class="lang-button w-6 h-6" data-lang="he" alt="Israeli Flag">
+                 <img src="https://flagcdn.com/w40/cn.png" class="lang-button w-6 h-6" data-lang="zh" alt="Chinese Flag">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Kangelase Sektsioon -->
+    <header class="min-h-screen flex items-center justify-center text-center overflow-hidden relative">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="absolute inset-0 z-0">
+             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-pulse"></div>
+             <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-900 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-pulse animation-delay-4000"></div>
+        </div>
+        <div class="container mx-auto px-6 z-10">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 tracking-tighter scroll-target">
+                <span class="gradient-text" data-key="heroTitle">Рефлексивная Машина Идей</span>
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-300 scroll-target" style="transition-delay: 200ms;" data-key="heroSubtitle">Архитектура мышления, которая превращает атлас эвристик в динамическую, исполняемую грамматику.</p>
+            <p class="text-sm mt-4 text-slate-500 scroll-target" style="transition-delay: 400ms;" data-key="heroCredit">На основе работы А. Я. Белова «Идеи решения математических задач»</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-20 space-y-32">
+
+        <!-- Manifest -->
+        <section id="manifest" class="scroll-target">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4" data-key="manifestTitle">Манифест: От эвристических гнёзд к самооценке мысли</h2>
+                <p class="text-lg max-w-3xl mx-auto text-slate-400" data-key="manifestSubtitle">RMI — это не просто очередной каталог правил. Это система, которая наблюдает за собой, измеряет прогресс, диагностирует тупики и активно перестраивает свою стратегию.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="p-8 glass-card">
+                    <h3 class="text-2xl font-bold mb-3 text-blue-400" data-key="manifestCard1Title">Преодоление Парадигмы Пойи</h3>
+                    <p class="text-slate-300" data-key="manifestCard1Text">Традиционные эвристики (как у Д. Пойи) — это советы. Они требуют интуитивного применения. RMI, напротив, — это <span class="font-semibold text-white">исполняемая грамматика</span>, которая сама решает, когда и какую идею использовать.</p>
+                </div>
+                <div class="p-8 glass-card">
+                    <h3 class="text-2xl font-bold mb-3 text-purple-400" data-key="manifestCard2Title">Потенциал Прогресса (Φ)</h3>
+                    <p class="text-slate-300" data-key="manifestCard2Text">Принцип RMI — <span class="font-semibold text-white">операционализация рефлексии</span>. Мы вводим «Потенциал Прогресса» (Φ) — метрику, на максимизацию которой направлен весь мыслительный процесс. Мышление становится процессом оптимизации.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meta-Algebra -->
+        <section id="algebra" class="scroll-target">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4" data-key="coreTitle">Мета-алгебраическое ядро RMI</h2>
+                <p class="text-lg max-w-3xl mx-auto text-slate-400" data-key="coreSubtitle">Пять компонентов, формирующих динамическую грамматику мышления RMI.</p>
+            </div>
+            <div id="tabs-container" class="w-full max-w-4xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button data-tab="diagnoos" class="tab-button active text-sm md:text-base px-4 py-2 rounded-full bg-slate-800 hover:bg-blue-600" data-key="tab1Button">1. Диагностика и Картирование</button>
+                    <button data-tab="plaan" class="tab-button text-sm md:text-base px-4 py-2 rounded-full bg-slate-800 hover:bg-blue-600" data-key="tab2Button">2. План и Редукция</button>
+                    <button data-tab="invariant" class="tab-button text-sm md:text-base px-4 py-2 rounded-full bg-slate-800 hover:bg-blue-600" data-key="tab3Button">3. Инвариант и Потенциал</button>
+                    <button data-tab="tsykkel" class="tab-button text-sm md:text-base px-4 py-2 rounded-full bg-slate-800 hover:bg-blue-600" data-key="tab4Button">4. Цикл Рефлексии</button>
+                    <button data-tab="eiramine" class="tab-button text-sm md:text-base px-4 py-2 rounded-full bg-slate-800 hover:bg-blue-600" data-key="tab5Button">5. Пренебрежение и Поправка</button>
+                </div>
+                <div class="glass-card p-8 min-h-[250px] flex items-center">
+                    <div id="diagnoos" class="tab-content">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text" data-key="tab1Title">Диагностика и Картирование</h3>
+                        <p class="text-slate-300" data-key="tab1Text">Процесс начинается с анализа. RMI строит карту признаков ситуации (дискретность/непрерывность, симметрии, тип цели). Затем система определяет вероятностное распределение по совместимым «гнёздам идей» для выбора наилучшего подхода.</p>
+                    </div>
+                    <div id="plaan" class="tab-content hidden">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text" data-key="tab2Title">План и Редукция</h3>
+                        <p class="text-slate-300" data-key="tab2Text">Определив перспективные направления, RMI конструирует план — граф потенциальных преобразований. Ключевую роль играют «мосты», меняющие представление задачи или сводящие её к более простой форме (например, через анализ крайних случаев).</p>
+                    </div>
+                    <div id="invariant" class="tab-content hidden">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text" data-key="tab3Title">Инвариант и Потенциал</h3>
+                        <p class="text-slate-300" data-key="tab3Text">Это ядро рефлексивного контроля. Для гарантии продвижения и избежания тупиков RMI использует Потенциал Прогресса (Φ) — метрику, которая должна монотонно изменяться (например, убывающая сложность, расстояние до цели). Это превращает поиск решения в управляемый процесс.</p>
+                    </div>
+                    <div id="tsykkel" class="tab-content hidden">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text" data-key="tab4Title">Спуск/Подъём как Цикл Рефлексии</h3>
+                        <p class="text-slate-300" data-key="tab4Text">Выполнение плана происходит под постоянным мониторингом. Если потенциал Φ стагнирует, система не продолжает бесплодные попытки, а активирует рефлексивный триггер. Процесс прерывается, точка тупика анализируется, и управление возвращается на этап диагностики с новыми данными.</p>
+                    </div>
+                    <div id="eiramine" class="tab-content hidden">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text" data-key="tab5Title">Пренебрежение и Поправка</h3>
+                        <p class="text-slate-300" data-key="tab5Text">RMI формализует мощный аналитический приём: осознанное упрощение модели для лучшего понимания глобальной структуры. За этим следует фаза поправки, где утраченные детали итеративно восстанавливаются (например, с помощью теории возмущений).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demonstratsioon -->
+        <section id="demo" class="scroll-target">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4" data-key="demoTitle">Как мыслит RMI: Демонстрации</h2>
+                <p class="text-lg max-w-3xl mx-auto text-slate-400" data-key="demoSubtitle">Две классические задачи, показывающие процесс RMI и силу рефлексивного «переключения».</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Näide 1: Malelaud -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-bold mb-4" data-key="demo1Title">Повреждённая шахматная доска</h3>
+                    <p class="text-slate-400 mb-6" data-key="demo1Problem">Можно ли замостить доску 8x8, у которой удалены две противоположные угловые клетки, костяшками домино 1x2?</p>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                            <p><span class="font-bold text-blue-400" data-key="demo1Step1Label">1. Диагностика:</span> <span data-key="demo1Step1Text">Задача распознана как комбинаторная на покрытие. Пробуется конструктивный подход (расстановка).</span></p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                             <p><span class="font-bold text-red-400" data-key="demo1Step2Label">2. Стагнация:</span> <span data-key="demo1Step2Text">Алгоритм сталкивается с комбинаторным взрывом. Потенциал прогресса (число покрытых клеток) не растёт. <span class="font-bold">InvariantTracker обнаруживает тупик.</span></span></p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                            <p><span class="font-bold text-purple-400" data-key="demo1Step3Label">3. Рефлексивное переключение:</span> <span data-key="demo1Step3Text">RMI прерывает конструктивный план. Приоритет смещается на доказательство невозможности и поиск инварианта.</span></p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                            <p><span class="font-bold text-green-400" data-key="demo1Step4Label">4. Решение:</span> <span data-key="demo1Step4Text">Активируется эвристика «стандартной раскраски». Находится инвариант: каждая костяшка покрывает одну чёрную и одну белую клетку. Удалённые углы одного цвета (например, 2 белых). Остаётся 32 чёрных и 30 белых клеток. Противоречие найдено, решение: невозможно.</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Näide 2: Arvuteooria -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-bold mb-4" data-key="demo2Title">Задача по теории чисел</h3>
+                    <p class="text-slate-400 mb-6" data-key="demo2Problem">Доказать, что p²-1 делится на 24, если p — простое число больше 3.</p>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                             <p><span class="font-bold text-blue-400" data-key="demo2Step1Label">1. Диагностика:</span> <span data-key="demo2Step1Text">Задача распознана как теория чисел, делимость. Пробуется индукция по простым числам.</span></p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                            <p><span class="font-bold text-red-400" data-key="demo2Step2Label">2. Стагнация:</span> <span data-key="demo2Step2Text">Найти связь между последовательными простыми числами сложно из-за их нерегулярности. Потенциал прогресса (сложность доказательства) не уменьшается.</span></p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                            <p><span class="font-bold text-purple-400" data-key="demo2Step3Label">3. Рефлексивное переключение:</span> <span data-key="demo2Step3Text">Индукция признана неэффективной. Приоритет переходит к редукции и анализу остатков.</span></p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-lg">
+                             <p><span class="font-bold text-green-400" data-key="demo2Step4Label">4. Решение:</span> <span data-key="demo2Step4Text">Задача сводится к двум: доказать делимость на 3 и на 8.<br>• <span class="font-semibold">По модулю 3:</span> p² ≡ 1 (mod 3), так как p не делится на 3.<br>• <span class="font-semibold">По модулю 8:</span> p²-1 = (p-1)(p+1). Это два последовательных чётных числа. Одно из них делится на 4. Произведение делится на 8.<br>Решение найдено через редукцию и анализ остатков.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Arhitektuur -->
+        <section id="arch" class="scroll-target">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4" data-key="archTitle">Техническая архитектура</h2>
+                <p class="text-lg max-w-3xl mx-auto text-slate-400" data-key="archSubtitle">Мыслительный процесс RMI представлен как ориентированный граф, где каждый шаг и решение формализованы.</p>
+            </div>
+            
+            <div class="glass-card p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center" data-key="archCodeTitle">Псевдокод основного цикла RMI</h3>
+                <pre class="bg-gray-900 text-sm text-left p-6 rounded-lg overflow-x-auto"><code class="language-python">
+FUNCTION Solve(S_initial):
+    S_current = S_initial
+    Φ = SelectInitialPotential(S_current)
+
+    WHILE NOT IsSolved(S_current):
+        H* = Diagnose(S_current)
+        P = Plan(S_current, H*, Φ)
+
+        IF P IS FAILURE:
+            // Global deadlock, need to change Potential
+            Φ_new = SelectNewPotential(S_current, Φ)
+            IF Φ_new == Φ: RETURN FAILURE // No better potential found
+            Φ = Φ_new; CONTINUE
+
+        // Execute plan with monitoring
+        S_next, Status = ExecuteMonitored(P, S_current, Φ)
+
+        IF Status == STAGNATION:
+            // Reflexive trigger. Diagnosis will be re-run
+            // with failure history.
+            Log("Stagnation detected. Re-diagnosing.")
+        ELSE IF Status == PROGRESS:
+            S_current = S_next
+
+    RETURN S_current
+                </code></pre>
+            </div>
+        </section>
+
+        <!-- Bullet-proof Claims -->
+        <section id="claims" class="scroll-target">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4" data-key="claimsTitle">Восемь «пуленепробиваемых» тезисов</h2>
+                <p class="text-lg max-w-3xl mx-auto text-slate-400" data-key="claimsSubtitle">Научно-проверяемые утверждения об архитектуре RMI.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim1Title">1. Монотонность Прогресса</h4>
+                    <p class="text-sm text-slate-400" data-key="claim1Text">Каждая сессия решения демонстрирует монотонное изменение потенциала Φ в сторону цели.</p>
+                </div>
+                <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim2Title">2. Эффективность Рефлексии</h4>
+                    <p class="text-sm text-slate-400" data-key="claim2Text">Системы с RMI показывают статистически более высокий процент «спасённых тупиков».</p>
+                </div>
+                 <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim3Title">3. Обнаружение Стагнации</h4>
+                    <p class="text-sm text-slate-400" data-key="claim3Text">RMI обнаруживает тупики быстрее, чем методы, основанные на тайм-аутах или глубине.</p>
+                </div>
+                 <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim4Title">4. Сила Управляемого Упрощения</h4>
+                    <p class="text-sm text-slate-400" data-key="claim4Text">Стратегия «Пренебреги и Исправь» расширяет класс решаемых задач.</p>
+                </div>
+                 <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim5Title">5. Композиционность «Гнёзд»</h4>
+                    <p class="text-sm text-slate-400" data-key="claim5Text">Сложные стратегии могут быть автоматически сгенерированы из базовых идей.</p>
+                </div>
+                 <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim6Title">6. Корреляция Рефлексии и Сложности</h4>
+                    <p class="text-sm text-slate-400" data-key="claim6Text">Число рефлексивных переключений коррелирует с экспертной оценкой сложности задачи.</p>
+                </div>
+                 <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim7Title">7. Обучаемость Диагностики</h4>
+                    <p class="text-sm text-slate-400" data-key="claim7Text">Точность модуля диагностики растёт с накоплением опыта.</p>
+                </div>
+                 <div class="glass-card p-6">
+                    <h4 class="font-bold text-lg mb-2 text-blue-300" data-key="claim8Title">8. Выявление Ложных Аналогий</h4>
+                    <p class="text-sm text-slate-400" data-key="claim8Text">RMI способна распознавать обманчиво похожие задачи, отслеживая нарушения инвариантов.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-800 mt-20">
+        <div class="container mx-auto py-8 px-6 text-center text-slate-500">
+            <p data-key="footerText1">Интерактивная презентация на основе работы Стивена Альбера «Рефлексивная Машина Идей (RMI)».</p>
+            <p class="text-sm mt-2" data-key="footerText2">Создано искусственным интеллектом.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                ru: {
+                    pageTitle: "Рефлексивная Машина Идей (RMI): Интерактивная Презентация",
+                    navManifest: "Манифест",
+                    navCore: "Ядро",
+                    navDemo: "Демонстрация",
+                    navArch: "Архитектура",
+                    navClaims: "Тезисы",
+                    heroTitle: "Рефлексивная Машина Идей",
+                    heroSubtitle: "Архитектура мышления, которая превращает атлас эвристик в динамическую, исполняемую грамматику.",
+                    heroCredit: "На основе работы А. Я. Белова «Идеи решения математических задач»",
+                    manifestTitle: "Манифест: От эвристических гнёзд к самооценке мысли",
+                    manifestSubtitle: "RMI — это не просто очередной каталог правил. Это система, которая наблюдает за собой, измеряет прогресс, диагностирует тупики и активно перестраивает свою стратегию.",
+                    manifestCard1Title: "Преодоление Парадигмы Пойи",
+                    manifestCard1Text: "Традиционные эвристики (как у Д. Пойи) — это советы. Они требуют интуитивного применения. RMI, напротив, — это исполняемая грамматика, которая сама решает, когда и какую идею использовать.",
+                    manifestCard2Title: "Потенциал Прогресса (Φ)",
+                    manifestCard2Text: "Принцип RMI — операционализация рефлексии. Мы вводим «Потенциал Прогресса» (Φ) — метрику, на максимизацию которой направлен весь мыслительный процесс. Мышление становится процессом оптимизации.",
+                    coreTitle: "Мета-алгебраическое ядро RMI",
+                    coreSubtitle: "Пять компонентов, формирующих динамическую грамматику мышления RMI.",
+                    tab1Button: "1. Диагностика и Картирование",
+                    tab2Button: "2. План и Редукция",
+                    tab3Button: "3. Инвариант и Потенциал",
+                    tab4Button: "4. Цикл Рефлексии",
+                    tab5Button: "5. Пренебрежение и Поправка",
+                    tab1Title: "Диагностика и Картирование",
+                    tab1Text: "Процесс начинается с анализа. RMI строит карту признаков ситуации (дискретность/непрерывность, симметрии, тип цели). Затем система определяет вероятностное распределение по совместимым «гнёздам идей» для выбора наилучшего подхода.",
+                    tab2Title: "План и Редукция",
+                    tab2Text: "Определив перспективные направления, RMI конструирует план — граф потенциальных преобразований. Ключевую роль играют «мосты», меняющие представление задачи или сводящие её к более простой форме (например, через анализ крайних случаев).",
+                    tab3Title: "Инвариант и Потенциал",
+                    tab3Text: "Это ядро рефлексивного контроля. Для гарантии продвижения и избежания тупиков RMI использует Потенциал Прогресса (Φ) — метрику, которая должна монотонно изменяться (например, убывающая сложность, расстояние до цели). Это превращает поиск решения в управляемый процесс.",
+                    tab4Title: "Спуск/Подъём как Цикл Рефлексии",
+                    tab4Text: "Выполнение плана происходит под постоянным мониторингом. Если потенциал Φ стагнирует, система не продолжает бесплодные попытки, а активирует рефлексивный триггер. Процесс прерывается, точка тупика анализируется, и управление возвращается на этап диагностики с новыми данными.",
+                    tab5Title: "Пренебрежение и Поправка",
+                    tab5Text: "RMI формализует мощный аналитический приём: осознанное упрощение модели для лучшего понимания глобальной структуры. За этим следует фаза поправки, где утраченные детали итеративно восстанавливаются (например, с помощью теории возмущений).",
+                    demoTitle: "Как мыслит RMI: Демонстрации",
+                    demoSubtitle: "Две классические задачи, показывающие процесс RMI и силу рефлексивного «переключения».",
+                    demo1Title: "Повреждённая шахматная доска",
+                    demo1Problem: "Можно ли замостить доску 8x8, у которой удалены две противоположные угловые клетки, костяшками домино 1x2?",
+                    demo1Step1Label: "1. Диагностика:",
+                    demo1Step1Text: "Задача распознана как комбинаторная на покрытие. Пробуется конструктивный подход (расстановка).",
+                    demo1Step2Label: "2. Стагнация:",
+                    demo1Step2Text: "Алгоритм сталкивается с комбинаторным взрывом. Потенциал прогресса (число покрытых клеток) не растёт. InvariantTracker обнаруживает тупик.",
+                    demo1Step3Label: "3. Рефлексивное переключение:",
+                    demo1Step3Text: "RMI прерывает конструктивный план. Приоритет смещается на доказательство невозможности и поиск инварианта.",
+                    demo1Step4Label: "4. Решение:",
+                    demo1Step4Text: "Активируется эвристика «стандартной раскраски». Находится инвариант: каждая костяшка покрывает одну чёрную и одну белую клетку. Удалённые углы одного цвета (например, 2 белых). Остаётся 32 чёрных и 30 белых клеток. Противоречие найдено, решение: невозможно.",
+                    demo2Title: "Задача по теории чисел",
+                    demo2Problem: "Доказать, что p²-1 делится на 24, если p — простое число больше 3.",
+                    demo2Step1Label: "1. Диагностика:",
+                    demo2Step1Text: "Задача распознана как теория чисел, делимость. Пробуется индукция по простым числам.",
+                    demo2Step2Label: "2. Стагнация:",
+                    demo2Step2Text: "Найти связь между последовательными простыми числами сложно из-за их нерегулярности. Потенциал прогресса (сложность доказательства) не уменьшается.",
+                    demo2Step3Label: "3. Рефлексивное переключение:",
+                    demo2Step3Text: "Индукция признана неэффективной. Приоритет переходит к редукции и анализу остатков.",
+                    demo2Step4Label: "4. Решение:",
+                    demo2Step4Text: "Задача сводится к двум: доказать делимость на 3 и на 8.<br>• <span class=\"font-semibold\">По модулю 3:</span> p² ≡ 1 (mod 3), так как p не делится на 3.<br>• <span class=\"font-semibold\">По модулю 8:</span> p²-1 = (p-1)(p+1). Это два последовательных чётных числа. Одно из них делится на 4. Произведение делится на 8.<br>Решение найдено через редукцию и анализ остатков.",
+                    archTitle: "Техническая архитектура",
+                    archSubtitle: "Мыслительный процесс RMI представлен как ориентированный граф, где каждый шаг и решение формализованы.",
+                    archCodeTitle: "Псевдокод основного цикла RMI",
+                    claimsTitle: "Восемь «пуленепробиваемых» тезисов",
+                    claimsSubtitle: "Научно-проверяемые утверждения об архитектуре RMI.",
+                    claim1Title: "1. Монотонность Прогресса",
+                    claim1Text: "Каждая сессия решения демонстрирует монотонное изменение потенциала Φ в сторону цели.",
+                    claim2Title: "2. Эффективность Рефлексии",
+                    claim2Text: "Системы с RMI показывают статистически более высокий процент «спасённых тупиков».",
+                    claim3Title: "3. Обнаружение Стагнации",
+                    claim3Text: "RMI обнаруживает тупики быстрее, чем методы, основанные на тайм-аутах или глубине.",
+                    claim4Title: "4. Сила Управляемого Упрощения",
+                    claim4Text: "Стратегия «Пренебреги и Исправь» расширяет класс решаемых задач.",
+                    claim5Title: "5. Композиционность «Гнёзд»",
+                    claim5Text: "Сложные стратегии могут быть автоматически сгенерированы из базовых идей.",
+                    claim6Title: "6. Корреляция Рефлексии и Сложности",
+                    claim6Text: "Число рефлексивных переключений коррелирует с экспертной оценкой сложности задачи.",
+                    claim7Title: "7. Обучаемость Диагностики",
+                    claim7Text: "Точность модуля диагностики растёт с накоплением опыта.",
+                    claim8Title: "8. Выявление Ложных Аналогий",
+                    claim8Text: "RMI способна распознавать обманчиво похожие задачи, отслеживая нарушения инвариантов.",
+                    footerText1: "Интерактивная презентация на основе работы Стивена Альбера «Рефлексивная Машина Идей (RMI)».",
+                    footerText2: "Создано искусственным интеллектом."
+                },
+                en: {
+                    pageTitle: "Reflexive Idea Machine (RMI): Interactive Presentation",
+                    navManifest: "Manifesto",
+                    navCore: "Core",
+                    navDemo: "Demonstration",
+                    navArch: "Architecture",
+                    navClaims: "Claims",
+                    heroTitle: "Reflexive Idea Machine",
+                    heroSubtitle: "An architecture of thought that transforms an atlas of heuristics into a dynamic, executable grammar.",
+                    heroCredit: "Based on the work of A. Y. Belov, 'Ideas for Solving Mathematical Problems'",
+                    manifestTitle: "Manifesto: From Heuristic Nests to Self-Assessed Thought",
+                    manifestSubtitle: "RMI is not just another catalog of rules. It is a system that observes itself, measures progress, diagnoses dead ends, and actively redesigns its strategy.",
+                    manifestCard1Title: "Overcoming the Pólya Paradigm",
+                    manifestCard1Text: "Traditional heuristics (like Pólya's) are suggestions. They require intuitive application. RMI, in contrast, is an executable grammar that decides for itself when and which idea to use.",
+                    manifestCard2Title: "Potential for Progress (Φ)",
+                    manifestCard2Text: "The principle of RMI is the operationalization of reflection. We introduce a 'Potential for Progress' (Φ) — a metric that the entire thought process is aimed at maximizing. Thinking becomes an optimization process.",
+                    coreTitle: "The Meta-Algebraic Core of RMI",
+                    coreSubtitle: "Five components that form the dynamic grammar of RMI's thought process.",
+                    tab1Button: "1. Diagnostics & Mapping",
+                    tab2Button: "2. Planning & Reduction",
+                    tab3Button: "3. Invariant & Potential",
+                    tab4Button: "4. Reflection Cycle",
+                    tab5Button: "5. Neglect & Correct",
+                    tab1Title: "Diagnostics & Mapping",
+                    tab1Text: "The process begins with analysis. RMI builds a feature map of the situation (discrete/continuous, symmetries, goal type). The system then determines a probability distribution over compatible 'idea nests' to choose the best approach.",
+                    tab2Title: "Planning & Reduction",
+                    tab2Text: "Having identified promising directions, RMI constructs a plan — a graph of potential transformations. 'Bridges' play a key role, changing the problem's representation or reducing it to a simpler form (e.g., through extreme case analysis).",
+                    tab3Title: "Invariant & Potential",
+                    tab3Text: "This is the core of reflexive control. To guarantee progress and avoid dead ends, RMI uses a Potential for Progress (Φ) — a metric that must change monotonically (e.g., decreasing complexity, distance to the goal). This turns the search for a solution into a controlled process.",
+                    tab4Title: "Descent/Ascent as a Reflection Cycle",
+                    tab4Text: "Plan execution occurs under constant monitoring. If the potential Φ stagnates, the system does not continue fruitless attempts but activates a reflexive trigger. The process is interrupted, the point of deadlock is analyzed, and control returns to the diagnosis stage with new data.",
+                    tab5Title: "Neglect & Correct",
+                    tab5Text: "RMI formalizes a powerful analytical technique: conscious simplification of the model for a better understanding of the global structure. This is followed by a correction phase, where lost details are iteratively restored (e.g., using perturbation theory).",
+                    demoTitle: "How RMI Thinks: Demonstrations",
+                    demoSubtitle: "Two classic problems showing the RMI process and the power of the reflexive 'switch'.",
+                    demo1Title: "The Mutilated Chessboard",
+                    demo1Problem: "Can an 8x8 chessboard with two opposite corners removed be tiled by 1x2 dominoes?",
+                    demo1Step1Label: "1. Diagnosis:",
+                    demo1Step1Text: "The problem is identified as a combinatorial tiling task. A constructive approach (placing dominoes) is attempted.",
+                    demo1Step2Label: "2. Stagnation:",
+                    demo1Step2Text: "The algorithm gets stuck in a combinatorial explosion. The progress potential (number of covered squares) stops increasing. The InvariantTracker detects a deadlock.",
+                    demo1Step3Label: "3. Reflexive Switch:",
+                    demo1Step3Text: "RMI halts the constructive plan. The priority shifts to proving impossibility and searching for an invariant.",
+                    demo1Step4Label: "4. Solution:",
+                    demo1Step4Text: "The 'standard coloring' heuristic is activated. An invariant is found: each domino covers one black and one white square. The removed corners are of the same color (e.g., 2 white). This leaves 32 black and 30 white squares. A contradiction is found. Solution: impossible.",
+                    demo2Title: "A Number Theory Problem",
+                    demo2Problem: "Prove that p²-1 is divisible by 24 if p is a prime number greater than 3.",
+                    demo2Step1Label: "1. Diagnosis:",
+                    demo2Step1Text: "Identified as a number theory, divisibility problem. Induction on prime numbers is attempted.",
+                    demo2Step2Label: "2. Stagnation:",
+                    demo2Step2Text: "Finding a relationship between consecutive primes is difficult due to their irregularity. The progress potential (proof complexity) does not decrease.",
+                    demo2Step3Label: "3. Reflexive Switch:",
+                    demo2Step3Text: "Induction is deemed ineffective. Priority shifts to reduction and modular arithmetic.",
+                    demo2Step4Label: "4. Solution:",
+                    demo2Step4Text: "The problem is reduced to two: prove divisibility by 3 and by 8.<br>• <span class=\"font-semibold\">Mod 3:</span> p² ≡ 1 (mod 3), as p is not divisible by 3.<br>• <span class=\"font-semibold\">Mod 8:</span> p²-1 = (p-1)(p+1). These are two consecutive even numbers. One of them is divisible by 4. The product is divisible by 8.<br>Solution found via reduction and modular analysis.",
+                    archTitle: "Technical Architecture",
+                    archSubtitle: "The RMI thought process is represented as a directed graph where every step and decision is formalized.",
+                    archCodeTitle: "Pseudocode of the Main RMI Loop",
+                    claimsTitle: "Eight 'Bullet-Proof' Claims",
+                    claimsSubtitle: "Scientifically verifiable statements about the RMI architecture.",
+                    claim1Title: "1. Monotonicity of Progress",
+                    claim1Text: "Every solution session demonstrates a monotonic change in the potential Φ towards the goal.",
+                    claim2Title: "2. Effectiveness of Reflection",
+                    claim2Text: "Systems with RMI show a statistically higher 'dead-end salvage rate'.",
+                    claim3Title: "3. Stagnation Detection",
+                    claim3Text: "RMI detects deadlocks faster than methods based on timeouts or search depth.",
+                    claim4Title: "4. Power of Managed Simplification",
+                    claim4Text: "The 'Neglect and Correct' strategy expands the class of solvable problems.",
+                    claim5Title: "5. Composability of 'Nests'",
+                    claim5Text: "Complex strategies can be automatically generated from basic ideas.",
+                    claim6Title: "6. Correlation of Reflection and Complexity",
+                    claim6Text: "The number of reflexive switches correlates with the expert-rated complexity of the problem.",
+                    claim7Title: "7. Learnability of Diagnostics",
+                    claim7Text: "The accuracy of the diagnostics module increases with experience.",
+                    claim8Title: "8. Detection of False Analogies",
+                    claim8Text: "RMI can recognize deceptively similar problems by tracking invariant violations.",
+                    footerText1: "An interactive presentation based on the work of Steven Alber, 'Reflexive Idea Machine (RMI)'.",
+                    footerText2: "Created by Artificial Intelligence."
+                },
+                he: {
+                    pageTitle: "מכונת רעיונות רפלקסיבית (RMI): מצגת אינטראקטיבית",
+                    navManifest: "מניפסט",
+                    navCore: "ליבה",
+                    navDemo: "הדגמה",
+                    navArch: "ארכיטקטורה",
+                    navClaims: "טענות",
+                    heroTitle: "מכונת רעיונות רפלקסיבית",
+                    heroSubtitle: "ארכיטקטורה של חשיבה ההופכת אטלס של היוריסטיקות לדקדוק דינמי ובר-ביצוע.",
+                    heroCredit: "מבוסס על עבודתו של א. י. בלוב, 'רעיונות לפתרון בעיות מתמטיות'",
+                    manifestTitle: "מניפסט: מקני היוריסטיקות להערכה עצמית של המחשבה",
+                    manifestSubtitle: "RMI אינו רק עוד קטלוג של כללים. זוהי מערכת שמתבוננת בעצמה, מודדת התקדמות, מאבחנת מבואות סתומים ומתכננת מחדש את האסטרטגיה שלה באופן פעיל.",
+                    manifestCard1Title: "התגברות על פרדיגמת פוליה",
+                    manifestCard1Text: "היוריסטיקות מסורתיות (כמו של ג'. פוליה) הן הצעות. הן דורשות יישום אינטואיטיבי. RMI, לעומת זאת, הוא דקדוק בר-ביצוע שמחליט בעצמו מתי ובאיזה רעיון להשתמש.",
+                    manifestCard2Title: "פוטנציאל להתקדמות (Φ)",
+                    manifestCard2Text: "העיקרון של RMI הוא התפעול (אופרציונליזציה) של הרפלקסיה. אנו מציגים 'פוטנציאל להתקדמות' (Φ) — מדד שתהליך המחשבה כולו מכוון למקסם. החשיבה הופכת לתהליך אופטימיזציה.",
+                    coreTitle: "הליבה המטא-אלגברית של RMI",
+                    coreSubtitle: "חמישה רכיבים המרכיבים את הדקדוק הדינמי של תהליך החשיבה ב-RMI.",
+                    tab1Button: "1. אבחון ומיפוי",
+                    tab2Button: "2. תכנון ורדוקציה",
+                    tab3Button: "3. אינווריאנט ופוטנציאל",
+                    tab4Button: "4. מחזור רפלקסיה",
+                    tab5Button: "5. הזנחה ותיקון",
+                    tab1Title: "אבחון ומיפוי",
+                    tab1Text: "התהליך מתחיל בניתוח. RMI בונה מפת תכונות של המצב (בדיד/רציף, סימטריות, סוג המטרה). לאחר מכן המערכת קובעת התפלגות הסתברותית על פני 'קני רעיונות' תואמים כדי לבחור את הגישה הטובה ביותר.",
+                    tab2Title: "תכנון ורדוקציה",
+                    tab2Text: "לאחר זיהוי כיוונים מבטיחים, RMI בונה תוכנית — גרף של טרנספורמציות פוטנציאליות. 'גשרים' ממלאים תפקיד מפתח, משנים את ייצוג הבעיה או מצמצמים אותה לצורה פשוטה יותר (למשל, באמצעות ניתוח מקרי קצה).",
+                    tab3Title: "אינווריאנט ופוטנציאל",
+                    tab3Text: "זוהי ליבת הבקרה הרפלקסיבית. כדי להבטיח התקדמות ולהימנע ממבואות סתומים, RMI משתמש בפוטנציאל להתקדמות (Φ) — מדד שחייב להשתנות באופן מונוטוני (למשל, מורכבות פוחתת, מרחק מהמטרה). זה הופך את החיפוש אחר פתרון לתהליך מבוקר.",
+                    tab4Title: "ירידה/עלייה כמחזור רפלקסיה",
+                    tab4Text: "ביצוע התוכנית מתרחש תחת ניטור מתמיד. אם הפוטנציאל Φ קופא על שמריו, המערכת לא ממשיכה בניסיונות עקרים אלא מפעילה טריגר רפלקסיבי. התהליך מופסק, נקודת התקיעות מנותחת, והשליטה חוזרת לשלב האבחון עם נתונים חדשים.",
+                    tab5Title: "הזנחה ותיקון",
+                    tab5Text: "RMI ממסד טכניקה אנליטית רבת עוצמה: פישוט מודע של המודל להבנה טובה יותר של המבנה הגלובלי. לאחר מכן מגיע שלב תיקון, שבו פרטים שאבדו משוחזרים באופן איטרטיבי (למשל, באמצעות תורת ההפרעות).",
+                    demoTitle: "איך RMI חושב: הדגמות",
+                    demoSubtitle: "שתי בעיות קלאסיות המדגימות את תהליך RMI ואת כוחו של 'המתג' הרפלקסיבי.",
+                    demo1Title: "לוח השחמט הפגום",
+                    demo1Problem: "האם ניתן לרצף לוח שחמט 8x8 שהוסרו ממנו שתי פינות נגדיות, באבני דומינו 1x2?",
+                    demo1Step1Label: "1. אבחון:",
+                    demo1Step1Text: "הבעיה מזוהה כמשימת ריצוף קומבינטורית. מנסים גישה קונסטרוקטיבית (הנחת אבני דומינו).",
+                    demo1Step2Label: "2. קיפאון:",
+                    demo1Step2Text: "האלגוריתם נתקע בפיצוץ קומבינטורי. פוטנציאל ההתקדמות (מספר המשבצות המכוסות) מפסיק לגדול. ה-InvariantTracker מזהה מבוי סתום.",
+                    demo1Step3Label: "3. מתג רפלקסיבי:",
+                    demo1Step3Text: "RMI עוצר את התוכנית הקונסטרוקטיבית. העדיפות עוברת להוכחת אי-אפשרות וחיפוש אינווריאנט.",
+                    demo1Step4Label: "4. פתרון:",
+                    demo1Step4Text: "היוריסטיקת 'הצביעה הסטנדרטית' מופעלת. נמצא אינווריאנט: כל אבן דומינו מכסה משבצת שחורה אחת ומשבצת לבנה אחת. הפינות שהוסרו הן באותו צבע (למשל, 2 לבנות). נותרו 32 משבצות שחורות ו-30 לבנות. נמצאה סתירה. פתרון: בלתי אפשרי.",
+                    demo2Title: "בעיה בתורת המספרים",
+                    demo2Problem: "הוכח כי p²-1 מתחלק ב-24 אם p הוא מספר ראשוני גדול מ-3.",
+                    demo2Step1Label: "1. אבחון:",
+                    demo2Step1Text: "מזוהה כבעיה בתורת המספרים, חלוקה. מנסים אינדוקציה על מספרים ראשוניים.",
+                    demo2Step2Label: "2. קיפאון:",
+                    demo2Step2Text: "קשה למצוא קשר בין ראשוניים עוקבים בגלל אי-סדירותם. פוטנציאל ההתקדמות (מורכבות ההוכחה) אינו יורד.",
+                    demo2Step3Label: "3. מתג רפלקסיבי:",
+                    demo2Step3Text: "אינדוקציה נחשבת ללא יעילה. העדיפות עוברת לרדוקציה וחשבון מודולרי.",
+                    demo2Step4Label: "4. פתרון:",
+                    demo2Step4Text: "הבעיה מצטמצמת לשתיים: להוכיח חלוקה ב-3 וב-8.<br>• <span class=\"font-semibold\">מודולו 3:</span> p² ≡ 1 (mod 3), מכיוון ש-p אינו מתחלק ב-3.<br>• <span class=\"font-semibold\">מודולו 8:</span> p²-1 = (p-1)(p+1). אלו שני מספרים זוגיים עוקבים. אחד מהם מתחלק ב-4. המכפלה מתחלקת ב-8.<br>הפתרון נמצא באמצעות רדוקציה וניתוח מודולרי.",
+                    archTitle: "ארכיטקטורה טכנית",
+                    archSubtitle: "תהליך המחשבה של RMI מיוצג כגרף מכוון שבו כל צעד והחלטה ממוסדים.",
+                    archCodeTitle: "פסאודו-קוד של הלולאה הראשית ב-RMI",
+                    claimsTitle: "שמונה טענות 'חסינות-כדורים'",
+                    claimsSubtitle: "הצהרות הניתנות לאימות מדעי אודות ארכיטקדורת RMI.",
+                    claim1Title: "1. מונוטוניות של התקדמות",
+                    claim1Text: "כל סשן פתרון מדגים שינוי מונוטוני בפוטנציאל Φ לעבר המטרה.",
+                    claim2Title: "2. יעילות הרפלקסיה",
+                    claim2Text: "מערכות עם RMI מציגות 'שיעור חילוץ ממבוי סתום' גבוה יותר סטטיסטית.",
+                    claim3Title: "3. זיהוי קיפאון",
+                    claim3Text: "RMI מזהה מבואות סתומים מהר יותר משיטות המבוססות על פסק זמן או עומק חיפוש.",
+                    claim4Title: "4. כוחו של פישוט מנוהל",
+                    claim4Text: "אסטרטגיית 'הזנח ותקן' מרחיבה את סוג הבעיות הפתירות.",
+                    claim5Title: "5. קומפוזיציונליות של 'קנים'",
+                    claim5Text: "ניתן ליצור אסטרטגיות מורכבות באופן אוטומטי מרעיונות בסיסיים.",
+                    claim6Title: "6. מתאם בין רפלקסיה למורכבות",
+                    claim6Text: "מספר המתגים הרפלקסיביים נמצא במתאם עם מורכבות הבעיה המוערכת על ידי מומחים.",
+                    claim7Title: "7. יכולת למידה של האבחון",
+                    claim_7_text: "דיוק מודול האבחון גדל עם הניסיון.",
+                    claim8Title: "8. זיהוי אנלוגיות שגויות",
+                    claim8Text: "RMI יכולה לזהות בעיות דומות באופן מטעה על ידי מעקב אחר הפרות אינווריאנטים.",
+                    footerText1: "מצגת אינטראקטיבית המבוססת על עבודתו של סטיבן אלבר, 'מכונת רעיונות רפלקסיבית (RMI)'.",
+                    footerText2: "נוצר על ידי בינה מלאכותית."
+                },
+                zh: {
+                    pageTitle: "反思性创意机器 (RMI): 交互式演示",
+                    navManifest: "宣言",
+                    navCore: "核心",
+                    navDemo: "演示",
+                    navArch: "架构",
+                    navClaims: "论点",
+                    heroTitle: "反思性创意机器",
+                    heroSubtitle: "一种将启发式图谱转化为动态、可执行语法的思维架构。",
+                    heroCredit: "基于 A. Y. Belov 的著作《解决数学问题的思想》",
+                    manifestTitle: "宣言：从启发式“巢穴”到思维的自我评估",
+                    manifestSubtitle: "RMI 不仅仅是又一个规则目录。它是一个观察自身、衡量进展、诊断僵局并主动重新设计其策略的系统。",
+                    manifestCard1Title: "超越波利亚范式",
+                    manifestCard1Text: "传统的启发式方法（如波利亚的方法）是建议。它们需要直观的应用。相反，RMI 是一种可执行的语法，它自己决定何时以及使用何种思想。",
+                    manifestCard2Title: "进展潜力 (Φ)",
+                    manifestCard2Text: "RMI 的原则是反思的操作化。我们引入了“进展潜力”（Φ）——整个思维过程旨在最大化的一个度量。思维变成了一个优化过程。",
+                    coreTitle: "RMI 的元代数核心",
+                    coreSubtitle: "构成 RMI 思维过程动态语法的五个组成部分。",
+                    tab1Button: "1. 诊断与映射",
+                    tab2Button: "2. 规划与归约",
+                    tab3Button: "3. 不变量与势能",
+                    tab4Button: "4. 反思循环",
+                    tab5Button: "5. 忽略与修正",
+                    tab1Title: "诊断与映射",
+                    tab1Text: "过程始于分析。RMI 构建情况的特征图（离散/连续、对称性、目标类型）。然后系统确定兼容的“思想巢穴”上的概率分布，以选择最佳方法。",
+                    tab2Title: "规划与归约",
+                    tab2Text: "确定了有希望的方向后，RMI 构建一个计划——一个潜在转换的图。 “桥梁”在其中扮演关键角色，改变问题的表示或将其简化为更简单的形式（例如，通过极端情况分析）。",
+                    tab3Title: "不变量与势能",
+                    tab3Text: "这是反思性控制的核心。为保证进展并避免僵局，RMI 使用进展潜力（Φ）——一个必须单调变化的度量（例如，复杂度降低、与目标的距离）。这将寻找解决方案的过程转变为一个受控过程。",
+                    tab4Title: "下降/上升作为反思循环",
+                    tab4Text: "计划的执行在持续监控下进行。如果潜力 Φ 停滞不前，系统不会继续徒劳的尝试，而是激活一个反思性触发器。过程被中断，分析僵局点，并将控制权返回到带有新数据的诊断阶段。",
+                    tab5Title: "忽略与修正",
+                    tab5Text: "RMI 形式化了一种强大的分析技术：有意识地简化模型以更好地理解全局结构。随后是修正阶段，在此阶段，丢失的细节被迭代地恢复（例如，使用扰动理论）。",
+                    demoTitle: "RMI 如何思考：演示",
+                    demoSubtitle: "两个经典问题，展示 RMI 过程和反思性“切换”的力量。",
+                    demo1Title: "残缺的棋盘",
+                    demo1Problem: "一个移除了两个相对角的 8x8 棋盘，能否用 1x2 的多米诺骨牌平铺？",
+                    demo1Step1Label: "1. 诊断：",
+                    demo1Step1Text: "问题被识别为组合平铺任务。尝试采用构造性方法（放置骨牌）。",
+                    demo1Step2Label: "2. 停滞：",
+                    demo1Step2Text: "算法陷入组合爆炸。进展潜力（覆盖的方格数）停止增加。InvariantTracker 检测到僵局。",
+                    demo1Step3Label: "3. 反思性切换：",
+                    demo1Step3Text: "RMI 停止构造性计划。优先级转向证明不可能性并寻找不变量。",
+                    demo1Step4Label: "4. 解决方案：",
+                    demo1Step4Text: "“标准着色”启发式被激活。发现一个不变量：每个多米诺骨牌覆盖一个黑色和一个白色方格。被移除的角颜色相同（例如，2个白色）。剩下32个黑色和30个白色方格。发现矛盾。解决方案：不可能。",
+                    demo2Title: "数论问题",
+                    demo2Problem: "证明如果 p 是大于 3 的素数，则 p²-1 能被 24 整除。",
+                    demo2Step1Label: "1. 诊断：",
+                    demo2Step1Text: "被识别为数论、整除性问题。尝试对素数进行归纳。",
+                    demo2Step2Label: "2. 停滞：",
+                    demo2Step2Text: "由于素数的无规律性，很难找到连续素数之间的关系。进展潜力（证明的复杂性）没有减少。",
+                    demo2Step3Label: "3. 反思性切换：",
+                    demo2Step3Text: "归纳法被认为无效。优先级转向归约和模算术。",
+                    demo2Step4Label: "4. 解决方案：",
+                    demo2Step4Text: "问题被简化为两个：证明能被 3 整除和被 8 整除。<br>• <span class=\"font-semibold\">模 3：</span>p² ≡ 1 (mod 3)，因为 p 不能被 3 整除。<br>• <span class=\"font-semibold\">模 8：</span>p²-1 = (p-1)(p+1)。这是两个连续的偶数。其中一个能被 4 整除。乘积能被 8 整除。<br>通过归约和模分析找到解决方案。",
+                    archTitle: "技术架构",
+                    archSubtitle: "RMI 的思维过程表示为一个有向图，其中每一步和每个决策都被形式化。",
+                    archCodeTitle: "RMI 主循环伪代码",
+                    claimsTitle: "八个“无懈可击”的论点",
+                    claimsSubtitle: "关于 RMI 架构的科学可验证的陈述。",
+                    claim1Title: "1. 进展的单调性",
+                    claim1Text: "每个解决方案会话都展示了潜力 Φ 朝着目标的单调变化。",
+                    claim2Title: "2. 反思的有效性",
+                    claim2Text: "带有 RMI 的系统显示出统计上更高的“僵局挽救率”。",
+                    claim3Title: "3. 停滞检测",
+                    claim3Text: "RMI 比基于超时或搜索深度的方法更快地检测到僵局。",
+                    claim4Title: "4. 受控简化的力量",
+                    claim4Text: "“忽略与修正”策略扩展了可解决问题的类别。",
+                    claim5Title: "5. “巢穴”的可组合性",
+                    claim5Text: "复杂的策略可以从基本思想中自动生成。",
+                    claim6Title: "6. 反思与复杂度的相关性",
+                    claim6Text: "反思性切换的数量与专家评定的问题复杂度相关。",
+                    claim7Title: "7. 诊断的可学习性",
+                    claim7Text: "诊断模块的准确性随着经验的积累而增加。",
+                    claim8Title: "8. 错误类比的检测",
+                    claim8Text: "RMI 可以通过跟踪不变量违规来识别具有欺骗性相似性的问题。",
+                    footerText1: "基于 Steven Alber 的著作《反思性创意机器 (RMI)》的交互式演示。",
+                    footerText2: "由人工智能创建。"
+                }
+            };
+
+            const setLanguage = (lang) => {
+                const translation = translations[lang];
+                if (!translation) return;
+
+                document.querySelectorAll('[data-key]').forEach(element => {
+                    const key = element.getAttribute('data-key');
+                    if (translation[key]) {
+                        element.innerHTML = translation[key];
+                    }
+                });
+
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+                
+                document.querySelectorAll('.lang-button').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+
+                localStorage.setItem('rmi-lang', lang);
+            };
+
+            document.querySelectorAll('.lang-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    setLanguage(e.target.dataset.lang);
+                });
+            });
+
+            // Initial Load
+            const savedLang = localStorage.getItem('rmi-lang') || 'ru';
+            setLanguage(savedLang);
+
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.scroll-target').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Tabs
+            const tabsContainer = document.getElementById('tabs-container');
+            if (tabsContainer) {
+                const tabButtons = tabsContainer.querySelectorAll('.tab-button');
+                const tabContents = tabsContainer.querySelectorAll('.tab-content');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabId = button.dataset.tab;
+                        tabContents.forEach(content => content.classList.add('hidden'));
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        document.getElementById(tabId).classList.remove('hidden');
+                        button.classList.add('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
